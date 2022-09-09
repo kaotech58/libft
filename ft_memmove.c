@@ -6,36 +6,34 @@
 /*   By: teiffe <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/28 13:45:09 by teiffe            #+#    #+#             */
-/*   Updated: 2021/10/19 14:11:35 by teiffe           ###   ########.fr       */
+/*   Updated: 2022/09/09 17:58:41 by teiffe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/* Included libft to be able to use the size_t data type */
 #include "libft.h"
 
-/* This function copies len bytes from src to dst
- * and returns dst */
 void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-	unsigned char		*pdst;
-	const unsigned char	*psrc;
+	size_t	i;
 
-	pdst = (unsigned char *)dst;
-	psrc = (const unsigned char *)src;
-	if (src < dst)
-	{
-		psrc = psrc + len - 1;
-		pdst = pdst + len - 1;
-		while (len--)
+	if (!dst && !src)
+		return (0);
+	i = 0;
+	if ((size_t)dst - (size_t)src < len)
+	{	
+		i = len - 1;
+		while (i < len)
 		{
-			*pdst-- = *psrc--;
+			((unsigned char *)dst)[i] = ((unsigned char *)src)[i];
+			i--;
 		}
 	}
-	else if (src >= dst)
+	else
 	{
-		while (len--)
+		while (i < len)
 		{
-			*pdst++ = *psrc++;
+			((unsigned char *)dst)[i] = ((unsigned char *)src)[i];
+			i++;
 		}
 	}
 	return (dst);
